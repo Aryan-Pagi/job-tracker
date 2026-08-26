@@ -9,6 +9,9 @@ Keeping track of multiple job applications across different companies can quickl
 The application focuses on simplicity and practical job-search management without unnecessary complexity.
 
 ## Features
+## 🚀 Live Demo
+
+[View Job Tracker](https://job-tracker-kappa-snowy.vercel.app/)
 
 ### Dashboard
 
