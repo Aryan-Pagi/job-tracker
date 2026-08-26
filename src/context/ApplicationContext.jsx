@@ -7,9 +7,25 @@ const ApplicationProvider = ({ children }) => {
      return JSON.parse(localStorage.getItem("applications")) || []
 });
 
+const defaultProfile = {
+  name: "",
+  email: "",
+  phone: "",
+  location: "",
+  role: "",
+  employment: "Full time",
+  preferredLocation: "",
+  salary: "",
+};
+
+const [profile, setProfile] = useState(() => {
+  return JSON.parse(localStorage.getItem("profile")) || defaultProfile;
+});
+
   useEffect(() => {
     localStorage.setItem("applications", JSON.stringify(applications));
-  }, [applications]);
+    localStorage.setItem("profile", JSON.stringify(profile));
+  }, [applications, profile]);
 
   function addApplication(newApplication) {
     setApplications((prev) => [newApplication,...prev]);
@@ -43,7 +59,9 @@ const ApplicationProvider = ({ children }) => {
         addApplication,
         deleteApplication,
         updateApplication,
-        clearApplications
+        clearApplications,
+        profile,
+        setProfile
       }}
     >
       {children}

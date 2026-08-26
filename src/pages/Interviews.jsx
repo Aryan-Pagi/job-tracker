@@ -37,7 +37,7 @@ const Interviews = () => {
   return (
     <div className="min-h-screen bg-slate-50">
       {/* Header */}
-      <div className="bg-white border-b border-slate-200 px-8 py-6">
+      <div className="bg-white border-b border-slate-200 px-4 md:px-8 py-5 md:py-6">
         <div>
           <h1 className="text-2xl font-semibold text-slate-800">Interviews</h1>
 
@@ -141,7 +141,7 @@ const Interviews = () => {
                   interviewDate.setHours(0, 0, 0, 0);
 
                   const isPast = interviewDate < today;
-                  const isToday=interviewDate.getTime()===today.getTime();
+                  const isToday = interviewDate.getTime() === today.getTime();
 
                   return (
                     <div
@@ -186,10 +186,16 @@ const Interviews = () => {
                           className={`inline-flex px-3 py-1.5 rounded-full text-xs font-medium ${
                             isPast
                               ? "bg-slate-100 text-slate-500"
-                              : isToday? "bg-blue-100 text-blue-700" :"bg-yellow-100 text-yellow-700"
+                              : isToday
+                                ? "bg-blue-100 text-blue-700"
+                                : "bg-yellow-100 text-yellow-700"
                           }`}
                         >
-                          {isPast ? "Completed" :isToday ? "Today" : "Upcoming"}
+                          {isPast
+                            ? "Completed"
+                            : isToday
+                              ? "Today"
+                              : "Upcoming"}
                         </span>
 
                         {/* Action */}

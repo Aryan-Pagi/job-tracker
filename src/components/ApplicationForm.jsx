@@ -66,8 +66,10 @@ const ApplicationForm = ({onClose,applicationToEdit}) => {
           newErrors.appliedDate="Applied date is required";
         }
 
-        if(formData.appliedDate && new Date(formData.appliedDate)>new Date()){
-          newErrors.appliedDate="Applied date cannot be in the future";
+        const today = new Date().toISOString().split("T")[0];
+
+        if (formData.appliedDate > today) {
+          newErrors.appliedDate = "Applied date cannot be in the future";
         }
 
         if(formData.status==="Interview" && !formData.interviewDate.trim()){
@@ -232,7 +234,6 @@ const ApplicationForm = ({onClose,applicationToEdit}) => {
                   <option>Interview</option>
                   <option>Offer</option>
                   <option>Rejected</option>
-                  <option>Withdrawn</option>
                 </select>
                 {errors.status && (
                   <p className="text-xs text-red-500 mt-1">{errors.status}</p>

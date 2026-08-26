@@ -1,20 +1,16 @@
 import { useState } from "react";
+import { useContext } from "react";
+import { ApplicationContext } from "../context/ApplicationContext";
 
 const Profile = () => {
-  const [profile, setProfile] = useState({
-    name: "John Doe",
-    email: "john@example.com",
-    phone: "",
-    location: "",
-    role: "",
-    employment: "Full time",
-    salary: "",
-  });
+  const {profile,setProfile}=useContext(ApplicationContext);
+  const [profileData, setProfileData] = useState(profile);
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    setProfile((prev) => ({
+    setProfileData((prev) => ({
       ...prev,
       [name]: value,
     }));
@@ -22,14 +18,14 @@ const Profile = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    console.log(profile);
+    setProfile(profileData);
+    
   };
 
   return (
     <div className="min-h-screen bg-slate-50">
       {/* Header */}
-      <div className="bg-white border-b border-slate-200 px-8 py-6">
+      <div className="bg-white border-b border-slate-200 px-4 md:px-8 py-5 md:py-6">
         <div>
           <h1 className="text-2xl font-semibold text-slate-800">Profile</h1>
 
@@ -56,13 +52,6 @@ const Profile = () => {
                 </h2>
 
                 <p className="text-sm text-slate-500 mt-1">{profile.email}</p>
-
-                <button
-                  type="button"
-                  className="text-sm text-purple-600 hover:text-purple-700 font-medium mt-2"
-                >
-                  Change profile picture
-                </button>
               </div>
             </div>
           </div>
@@ -89,7 +78,7 @@ const Profile = () => {
                 <input
                   type="text"
                   name="name"
-                  value={profile.name}
+                  value={profileData.name}
                   onChange={handleChange}
                   placeholder="Enter your name"
                   className="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
@@ -105,7 +94,7 @@ const Profile = () => {
                 <input
                   type="email"
                   name="email"
-                  value={profile.email}
+                  value={profileData.email}
                   onChange={handleChange}
                   placeholder="Enter your email"
                   className="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
@@ -121,7 +110,7 @@ const Profile = () => {
                 <input
                   type="tel"
                   name="phone"
-                  value={profile.phone}
+                  value={profileData.phone}
                   onChange={handleChange}
                   placeholder="Enter your phone number"
                   className="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
@@ -136,8 +125,8 @@ const Profile = () => {
 
                 <input
                   type="text"
-                  name="location"
-                  value={profile.location}
+                  name="preferredLocation"
+                  value={profileData.preferredLocation}
                   onChange={handleChange}
                   placeholder="e.g. Goa, India"
                   className="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
@@ -168,7 +157,7 @@ const Profile = () => {
                 <input
                   type="text"
                   name="role"
-                  value={profile.role}
+                  value={profileData.role}
                   onChange={handleChange}
                   placeholder="e.g. Frontend Developer"
                   className="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
@@ -183,7 +172,7 @@ const Profile = () => {
 
                 <select
                   name="employment"
-                  value={profile.employment}
+                  value={profileData.employment}
                   onChange={handleChange}
                   className="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm bg-white outline-none focus:ring-2 focus:ring-purple-500"
                 >
@@ -203,7 +192,9 @@ const Profile = () => {
 
                 <input
                   type="text"
-                  name="preferredLocation"
+                  name="location"
+                  value={profileData.location}
+                  onChange={handleChange}
                   placeholder="e.g. Bangalore, Remote"
                   className="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                 />
@@ -218,7 +209,7 @@ const Profile = () => {
                 <input
                   type="text"
                   name="salary"
-                  value={profile.salary}
+                  value={profileData.salary}
                   onChange={handleChange}
                   placeholder="e.g. 8 LPA"
                   className="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"

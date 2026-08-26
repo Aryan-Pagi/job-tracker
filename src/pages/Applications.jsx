@@ -55,7 +55,7 @@ const Applications = () => {
   return (
     <div className="min-h-screen bg-slate-50">
       {/* Header */}
-      <div className="bg-white border-b border-slate-200 px-8 py-6">
+      <div className="bg-white border-b border-slate-200 px-4 md:px-8 py-5 md:py-6">
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-2xl font-semibold text-slate-800">
@@ -570,7 +570,7 @@ const Applications = () => {
 
       {/* Add */}
       {showModal && <ApplicationForm onClose={() => setShowModal(false)} />}
-        {/* {delete Modal} */}
+      {/* {delete Modal} */}
       {deleteId && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
           <div className="bg-white rounded-2xl w-full max-w-md p-6 shadow-xl">

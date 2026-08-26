@@ -28,7 +28,7 @@ const Settings = () => {
   return (
     <div className="min-h-screen bg-slate-50">
       {/* Header */}
-      <div className="bg-white border-b border-slate-200 px-8 py-6">
+      <div className="bg-white border-b border-slate-200 px-4 md:px-8 py-5 md:py-6">
         <div>
           <h1 className="text-2xl font-semibold text-slate-800">Settings</h1>
 
@@ -243,7 +243,7 @@ const Settings = () => {
 
             <button
               type="button"
-              onClick={()=>setShowDeleteModal(true)}
+              onClick={() => setShowDeleteModal(true)}
               className="border border-red-200 text-red-600 hover:bg-red-50 px-4 py-2 rounded-lg text-sm font-medium transition"
             >
               Delete all data

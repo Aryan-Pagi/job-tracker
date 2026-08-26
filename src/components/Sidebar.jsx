@@ -1,11 +1,10 @@
 import { NavLink } from "react-router";
 
-const Sidebar = () => {
+const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
   const sidebarItems = [
     {
       name: "Dashboard",
       href: "/",
-      current: true,
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -113,75 +112,100 @@ const Sidebar = () => {
   ];
 
   return (
-    <aside className="fixed top-0 left-0 h-screen w-64 bg-white border-r border-slate-200 flex flex-col px-4 py-6">
-      {/* Logo */}
-      <div className="px-3 mb-8">
-        <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-xl bg-purple-600 text-white flex items-center justify-center font-bold text-lg shadow-sm">
-            J
-          </div>
+    <>
+      {/* Mobile backdrop */}
+      {sidebarOpen && (
+        <div
+          onClick={() => setSidebarOpen(false)}
+          className="fixed inset-0 bg-black/30 z-40 md:hidden"
+        />
+      )}
 
-          <div>
-            <h1 className="text-lg font-semibold text-slate-800">
-              Job Tracker
-            </h1>
+      <aside
+        className={`fixed top-0 left-0 z-50 h-screen w-64 bg-white border-r border-slate-200 flex flex-col px-4 py-6
+      transform transition-transform duration-300
+      ${sidebarOpen ? "translate-x-0" : "-translate-x-full"}
+      md:translate-x-0
+    `}
+      >
+        {/* Logo */}
+        <div className="px-3 mb-8">
+          <div className="flex items-center gap-3">
+            <div className="w-9 h-9 rounded-xl bg-purple-600 text-white flex items-center justify-center font-bold text-lg shadow-sm">
+              J
+            </div>
 
-            <p className="text-[11px] text-slate-400">Track your career</p>
+            <div>
+              <h1 className="text-lg font-semibold text-slate-800">
+                Job Tracker
+              </h1>
+
+              <p className="text-[11px] text-slate-400">Track your career</p>
+            </div>
           </div>
         </div>
-      </div>
+        <div className="md:hidden absolute top-5 right-4">
+          <button
+            onClick={() => setSidebarOpen(false)}
+            className="w-8 h-8 rounded-lg flex items-center justify-center text-slate-500 hover:bg-slate-100 hover:text-slate-700"
+            aria-label="Close navigation"
+          >
+            ×
+          </button>
+        </div>
 
-      {/* Navigation */}
-      <nav className="flex-1">
-        <p className="px-3 mb-3 text-[11px] font-semibold uppercase tracking-wider text-slate-400">
-          Menu
-        </p>
+        {/* Navigation */}
+        <nav className="flex-1">
+          <p className="px-3 mb-3 text-[11px] font-semibold uppercase tracking-wider text-slate-400">
+            Menu
+          </p>
 
-        <ul className="space-y-1">
-          {sidebarItems.map((item) => (
-            <li key={item.name}>
-              <NavLink
-                to={item.href}
-                className={({ isActive }) =>
-                  `group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200
+          <ul className="space-y-1">
+            {sidebarItems.map((item) => (
+              <li key={item.name}>
+                <NavLink
+                  to={item.href}
+                  onClick={() => setSidebarOpen(false)}
+                  className={({ isActive }) =>
+                    `group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200
                 ${
                   isActive
                     ? "bg-purple-50 text-purple-700"
                     : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
                 }`
-                }
-              >
-                {({ isActive }) => (
-                  <>
-                    <span
-                      className={`flex items-center justify-center w-5 h-5
+                  }
+                >
+                  {({ isActive }) => (
+                    <>
+                      <span
+                        className={`flex items-center justify-center w-5 h-5
                     ${
                       isActive
                         ? "text-purple-600"
                         : "text-slate-400 group-hover:text-slate-600"
                     }`}
-                    >
-                      {item.icon}
-                    </span>
+                      >
+                        {item.icon}
+                      </span>
 
-                    <span>{item.name}</span>
+                      <span>{item.name}</span>
 
-                    {/* Active indicator */}
-                    {isActive && (
-                      <span className="ml-auto w-1.5 h-1.5 rounded-full bg-purple-600" />
-                    )}
-                  </>
-                )}
-              </NavLink>
-            </li>
-          ))}
-        </ul>
-      </nav>
+                      {/* Active indicator */}
+                      {isActive && (
+                        <span className="ml-auto w-1.5 h-1.5 rounded-full bg-purple-600" />
+                      )}
+                    </>
+                  )}
+                </NavLink>
+              </li>
+            ))}
+          </ul>
+        </nav>
 
-      {/* Bottom section */}
-      <div className="pt-4 border-t border-slate-200">
-      </div>
-    </aside>
+        {/* Bottom section */}
+        <div className="pt-4 border-t border-slate-200"></div>
+      </aside>
+    </>
   );
 };
 
